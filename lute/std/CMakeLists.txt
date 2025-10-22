@@ -1,5 +1,14 @@
 add_library(Lute.Std STATIC)
 
+include(${CMAKE_CURRENT_LIST_DIR}/libs/_contents.cmake)
+lute_embed_files(
+    OUTPUT src/generated/modules
+    CXX_NAME lutestdlib
+    PREFIX "@std/"
+    WORKDIR "${CMAKE_CURRENT_LIST_DIR}/libs"
+    FILES ${lute_stdlib_files}
+)
+
 target_sources(Lute.Std PRIVATE
     include/lute/stdlib.h
 

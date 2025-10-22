@@ -9,12 +9,18 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 list(PREPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMakeBuild")
 
 include(get_version)
+include(codegen)
 
 project(
     Lute
     VERSION ${LUTE_VERSION}
     LANGUAGES CXX C
 )
+
+option(LUTE_BOOTSTRAPPED "Is lute being bootstrapped?" OFF)
+option(LUTE_EXECUTABLE "Path to an existing lute. Used to generate files." "lute")
+
+check_lute()
 
 option(LUTE_ENABLE_ASAN "Enable AddressSanitizer" OFF)
 if (LUTE_ENABLE_ASAN)

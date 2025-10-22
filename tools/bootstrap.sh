@@ -92,7 +92,7 @@ fi
 
 BUILD_PATH=$BUILD_ROOT/debug
 rm -rf build && mkdir build
-exe cmake -G=Ninja -B $BUILD_PATH -DCMAKE_BUILD_TYPE=Debug
+exe cmake -G=Ninja -B $BUILD_PATH -DCMAKE_BUILD_TYPE=Debug -DLUTE_BOOTSTRAP=On
 
 # build lute0
 exe ninja -C $BUILD_PATH $EXE_PATH

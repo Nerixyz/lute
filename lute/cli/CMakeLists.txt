@@ -1,5 +1,29 @@
 add_library(Lute.CLI.Commands STATIC)
 
+include("${PROJECT_SOURCE_DIR}/definitions/_contents.cmake")
+include("${PROJECT_SOURCE_DIR}/lute/std/libs/_contents.cmake")
+lute_merge_types(
+    OUTPUT commands/setup/generated/definitions.luau
+    WORKDIR "${PROJECT_SOURCE_DIR}/definitions"
+    FILES
+        "@lute=${PROJECT_SOURCE_DIR}/definitions"
+            ${lute_definition_files_absolute}
+        "@std=${PROJECT_SOURCE_DIR}/lute/std/libs"
+            ${lute_stdlib_files_absolute}
+)
+
+lute_embed_files(
+    OUTPUT generated/commands
+    CXX_NAME luteclicommands
+    PREFIX "@cli/"
+    WORKDIR "${CMAKE_CURRENT_LIST_DIR}/commands"
+    FILES
+        helloworld/helloworld.luau
+        helloworld/init.luau
+        setup/init.luau
+        setup/generated/definitions.luau
+)
+
 target_sources(Lute.CLI.Commands PRIVATE
     generated/commands.h
     generated/commands.cpp
